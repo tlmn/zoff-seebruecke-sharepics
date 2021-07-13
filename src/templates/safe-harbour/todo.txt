@@ -1,7 +1,0 @@
-- Buttons runder wie auf Seite
-- Button-Design wie auf SB seite
-- Insta-Story-Format für Zitat
-- sublinne news: range min kleiner max bei 1/5
-- haupttext nicht kleiner als 1/3, aber 1. range anpassen
-- lineheight: 1.1
-- action und sicherer hafen nur jeweils farbkomibiation -> figma
