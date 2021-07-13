@@ -11,13 +11,15 @@ const { colors } = theme;
 
 export const html2image = async ({ state, setState }, fileName = "") => {
   setState((prev) => ({ ...prev, templateScale: false }));
+
+  const { dimensions, ref } = state.slides[state.currentSlide];
   htmlToImage
-    .toJpeg(state.slides[state.currentSlide].ref.current, {
+    .toJpeg(ref.current, {
       quality: 1,
-      width: state.slides[state.currentSlide].dimensions.width,
-      height: state.slides[state.currentSlide].dimensions.height,
+      width: dimensions.width,
+      height: dimensions.height,
     })
-    .then(function (blob) {
+    .then((blob) => {
       saveAs(blob, `sharepic-seebruecke-${slugify(fileName.substring)}`);
       setState((prev) => ({ ...prev, templateScale: true }));
     });
@@ -74,7 +76,6 @@ export const getProperty = ({ state }, path) => {
 };
 
 export const calcTemplateScale = ({ state }) => {
-  console.log(state.slides[state.currentSlide].ref.current.clientWidth);
   return {
     transform:
       state.templateScale &&
