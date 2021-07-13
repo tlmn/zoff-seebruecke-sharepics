@@ -1,12 +1,12 @@
-import React, { useContext, useRef } from "react";
+import React, { useRef } from "react";
 import { getProperty, updateProperty } from "../../lib/lib";
 
 import IconReset from "../../assets/svg/reset";
 import IconUpload from "../../assets/svg/upload";
-import TemplateContext from "../templateContext";
+import useDataContext from "../../lib/useDataContext";
 
 export default ({ propertyPath, label }) => {
-  const [state, setState] = useContext(TemplateContext);
+  const { state, setState } = useDataContext();
   const inputFileRef = useRef(null);
   return (
     <>

@@ -1,8 +1,8 @@
-import React, { useContext } from "react";
 /* eslint-disable jsx-a11y/no-onchange */
 import { getProperty, updateProperty } from "../../lib/lib";
 
-import TemplateContext from "../templateContext";
+import React from "react";
+import useDataContext from "../../lib/useDataContext";
 
 export default ({
   options,
@@ -11,7 +11,7 @@ export default ({
   disabled = false,
   ...props
 }) => {
-  const [state, setState] = useContext(TemplateContext);
+  const { state, setState } = useDataContext();
   return (
     <div className="flex items-center">
       {label && (

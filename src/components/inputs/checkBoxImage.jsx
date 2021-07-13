@@ -1,10 +1,10 @@
 import { getProperty, updateProperty } from "../../lib/lib";
-import { useContext, useRef } from "react";
 
 import FontBoldIcon from "../../assets/svg/fontBold";
 import React from "react";
-import TemplateContext from "../templateContext";
 import { theme } from "../../../tailwind.config";
+import useDataContext from "../../lib/useDataContext";
+import { useRef } from "react";
 
 const CheckBoxImage = ({
   propertyPath,
@@ -12,7 +12,7 @@ const CheckBoxImage = ({
   type = "fontBold",
 }) => {
   const { colors } = theme;
-  const [state, setState] = useContext(TemplateContext);
+  const { state, setState } = useDataContext();
   const ref = useRef(null);
   const icons = {
     fontBold: (fillColor) => <FontBoldIcon fillColor={fillColor} />,

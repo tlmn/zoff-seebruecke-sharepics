@@ -1,11 +1,10 @@
 import { getProperty, updateProperty } from "../../lib/lib";
 
 import React from "react";
-import TemplateContext from "../templateContext";
-import { useContext } from "react";
+import useDataContext from "../../lib/useDataContext";
 
 const Checkbox = ({ propertyPath, label = "", disabled = false }) => {
-  const [state, setState] = useContext(TemplateContext);
+  const { state, setState } = useDataContext();
   return (
     <div className="flex items-center">
       <input

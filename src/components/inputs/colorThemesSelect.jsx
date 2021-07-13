@@ -1,11 +1,11 @@
-import React, { useContext } from "react";
 import { getProperty, updateProperty } from "../../lib/lib";
 
-import TemplateContext from "../templateContext";
+import React from "react";
 import { colorThemes } from "../../config/vars";
+import useDataContext from "../../lib/useDataContext";
 
 const ColorThemeSelector = ({ colorThemeOptions, propertyPath }) => {
-  const [state, setState] = useContext(TemplateContext);
+  const { state, setState } = useDataContext();
 
   return (
     <div className="flex justify-center mb-2">

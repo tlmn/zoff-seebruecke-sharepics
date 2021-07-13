@@ -3,16 +3,15 @@ import { getProperty, updateProperty } from "../../lib/lib";
 import FontBoldIcon from "../../assets/svg/fontBold";
 import InputIcon from "../../assets/svg/input";
 import React from "react";
-import TemplateContext from "../templateContext";
 import TextAreaIcon from "../../assets/svg/textArea";
 import TextCenterIcon from "../../assets/svg/textCenter";
 import TextLeftIcon from "../../assets/svg/textLeft";
 import { theme } from "../../../tailwind.config";
-import { useContext } from "react";
+import useDataContext from "../../lib/useDataContext";
 
 const OptionsSelector = ({ propertyPath, options = [], disabled = false }) => {
   const { colors } = theme;
-  const [state, setState] = useContext(TemplateContext);
+  const { state, setState } = useDataContext();
   const icons = {
     fontBold: (fillColor) => <FontBoldIcon fillColor={fillColor} />,
     textLeft: (fillColor) => <TextLeftIcon fillColor={fillColor} />,

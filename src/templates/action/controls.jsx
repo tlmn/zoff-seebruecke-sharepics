@@ -1,15 +1,11 @@
-import React, { useContext } from "react";
-
 import ControlsWrapper from "../../components/controlsWrapper";
 import DownloadButton from "../../components/inputs/downloadButton";
 import FieldSet from "../../components/inputs/fieldSet";
 import InputRepeater from "../../components/inputs/inputRepeater";
-import TemplateContext from "../../components/templateContext";
+import React from "react";
 
 export default () => {
   const currentSlide = 0;
-  const [state] = useContext(TemplateContext);
-
   return (
     <ControlsWrapper>
       <FieldSet legend="Text">

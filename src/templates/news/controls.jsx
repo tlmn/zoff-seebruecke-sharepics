@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useEffect } from "react";
 
 import BgImage from "../../components/inputs/bgImage";
 import Checkbox from "../../components/inputs/checkbox";
@@ -9,30 +9,20 @@ import DownloadButton from "../../components/inputs/downloadButton";
 import FieldSet from "../../components/inputs/fieldSet";
 import Input from "../../components/inputs/input";
 import InputRepeater from "../../components/inputs/inputRepeater";
-import TemplateContext from "../../components/templateContext";
 import TextScale from "../../components/inputs/textScale";
 import { updateProperty } from "../../lib/lib";
+import useDataContext from "../../lib/useDataContext";
 
 export default () => {
   const currentSlide = 0;
-  const [state, setState] = useContext(TemplateContext);
+  const { state, setState } = useDataContext();
 
   const {
-    slides: {
-      0: {
-        data: {
-          body: {
-            options: { position },
-          },
-        },
-      },
-    },
-  } = state;
+    data: { body, images, logo },
+  } = state.slides[currentSlide];
 
   useEffect(() => {
-    if (
-      state.slides[currentSlide].data.body.options.position === "items-start"
-    ) {
+    if (body.options.position === "items-start") {
       updateProperty(
         { setState },
         `slides[${currentSlide}].data.images.onlyOneImage`,
@@ -46,7 +36,7 @@ export default () => {
       );
     }
 
-    if (state.slides[currentSlide].data.body.options.position === "items-end") {
+    if (body.options.position === "items-end") {
       updateProperty(
         { setState },
         `slides[${currentSlide}].data.images.onlyOneImage`,
@@ -59,20 +49,18 @@ export default () => {
         "top-right"
       );
     }
-  }, [position]);
+  }, [body.options.position]);
 
   return (
     <ControlsWrapper>
       <FieldSet legend="Bilder">
         <Checkbox
           propertyPath={`slides[${currentSlide}].data.images.onlyOneImage`}
-          value={state.slides[currentSlide].data.images.onlyOneImage}
+          value={images.onlyOneImage}
           label="nur ein Bild"
           disabled={
-            state.slides[currentSlide].data.body.options.position ===
-              "items-start" ||
-            state.slides[currentSlide].data.body.options.position ===
-              "items-end"
+            body.options.position === "items-start" ||
+            body.options.position === "items-end"
               ? true
               : false
           }
@@ -83,7 +71,7 @@ export default () => {
           label="Bild oben"
         />
 
-        {!state.slides[currentSlide].data.images.onlyOneImage && (
+        {!images.onlyOneImage && (
           <BgImage
             propertyPath={`slides[${currentSlide}].data.images.lower`}
             label="Bild unten"
@@ -93,14 +81,12 @@ export default () => {
 
       <FieldSet legend="Logo">
         <CustomSelect
-          options={state.slides[currentSlide].data.logo.options.positions}
+          options={logo.options.positions}
           propertyPath={`slides[${currentSlide}].data.logo.options.position`}
           label="Position Logo"
           disabled={
-            state.slides[currentSlide].data.body.options.position ===
-              "items-start" ||
-            state.slides[currentSlide].data.body.options.position ===
-              "items-end"
+            body.options.position === "items-start" ||
+            body.options.position === "items-end"
               ? true
               : false
           }
@@ -114,17 +100,15 @@ export default () => {
         />
 
         <CustomSelect
-          options={state.slides[currentSlide].data.body.options.positions}
+          options={body.options.positions}
           propertyPath={`slides[${currentSlide}].data.body.options.position`}
           label="Position Text"
         />
 
         <InputRepeater propertyPath={`slides[${currentSlide}].data.body`} />
       </FieldSet>
-      {state.slides[currentSlide].data.body.options.position !==
-        "items-start" &&
-        state.slides[currentSlide].data.body.options.position !==
-          "items-end" && (
+      {body.options.position !== "items-start" &&
+        body.options.position !== "items-end" && (
           <FieldSet legend="Text 2. Farbe">
             <ColorThemeSelector
               colorThemeOptions={["white_black", "black_white"]}

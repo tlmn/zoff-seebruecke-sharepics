@@ -1,13 +1,13 @@
-import React, { useContext } from "react";
 import { getProperty, pushProperty, removeProperty } from "../../lib/lib";
 
 import CheckBoxImage from "./checkBoxImage";
 import CustomSelect from "./customSelect";
 import Input from "../inputs/input";
 import OptionsSelector from "./options";
-import TemplateContext from "../templateContext";
+import React from "react";
 import TextArea from "./textarea";
 import TextScale from "./textScale";
+import useDataContext from "../../lib/useDataContext";
 
 const InputRepeater = ({
   propertyPath,
@@ -17,7 +17,7 @@ const InputRepeater = ({
   selectInputType = false,
   positionOptions,
 }) => {
-  const [state, setState] = useContext(TemplateContext);
+  const { state, setState } = useDataContext();
   const lines = getProperty({ state }, `${propertyPath}.lines`);
   const lineTemplate = getProperty(
     { state },
@@ -33,11 +33,11 @@ const InputRepeater = ({
               { state },
               `${propertyPath}.lines[${index}].inputType`
             ) === "input" && (
-                <Input
-                  propertyPath={`${propertyPath}.lines[${index}].content`}
-                  className="mr-2"
-                />
-              )}
+              <Input
+                propertyPath={`${propertyPath}.lines[${index}].content`}
+                className="mr-2"
+              />
+            )}
             {getProperty(
               { state },
               `${propertyPath}.lines[${index}].inputType`

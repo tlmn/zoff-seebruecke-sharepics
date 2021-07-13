@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useEffect } from "react";
 
 import BgImage from "../../components/inputs/bgImage";
 import Checkbox from "../../components/inputs/checkbox";
@@ -8,33 +8,25 @@ import CustomSelect from "../../components/inputs/customSelect";
 import DownloadButton from "../../components/inputs/downloadButton";
 import FieldSet from "../../components/inputs/fieldSet";
 import InputRepeater from "../../components/inputs/inputRepeater";
-import TemplateContext from "../../components/templateContext";
 import { updateProperty } from "../../lib/lib";
+import useDataContext from "../../lib/useDataContext";
 
 export default () => {
   const currentSlide = 0;
-  const [state, setState] = useContext(TemplateContext);
+  const { state, setState } = useDataContext();
   const {
-    slides: {
-      0: {
-        data: {
-          background: { isImage },
-        },
-      },
-    },
-  } = state;
+    data: { background, body, logo },
+  } = state.slides[currentSlide];
 
   useEffect(() => {
-    if (
-      state.slides[currentSlide].data.body.options.colorTheme === "orange_white"
-    ) {
+    if (body.options.colorTheme === "orange_white") {
       updateProperty(
         { setState },
         `slides[${currentSlide}].data.body.options.colorTheme`,
         "white_orange"
       );
     }
-  }, [isImage]);
+  }, [background.isImage]);
 
   return (
     <ControlsWrapper>
@@ -50,17 +42,17 @@ export default () => {
       <FieldSet legend="Hintergrund">
         <Checkbox
           propertyPath={`slides[${currentSlide}].data.background.isImage`}
-          value={state.slides[currentSlide].data.background.isImage}
+          value={background.isImage}
           label="hat Hintergrundbild"
         />
-        {state.slides[currentSlide].data.background.isImage && (
+        {background.isImage && (
           <BgImage propertyPath={`slides[${currentSlide}].data.image`} />
         )}
       </FieldSet>
 
       <FieldSet legend="Logo">
         <CustomSelect
-          options={state.slides[currentSlide].data.logo.options.positions}
+          options={logo.options.positions}
           propertyPath={`slides[${currentSlide}].data.logo.options.position`}
           label="Position Logo"
         />
@@ -70,16 +62,14 @@ export default () => {
         <ColorThemeSelector
           propertyPath={`slides[${currentSlide}].data.body.options.colorTheme`}
           colorThemeOptions={[
-            state.slides[currentSlide].data.background.isImage
-              ? "orange_white"
-              : "",
+            background.isImage ? "orange_white" : "",
             "white_orange",
             "white_black",
           ]}
         />
 
         <CustomSelect
-          options={state.slides[currentSlide].data.body.options.bodyPositions}
+          options={body.options.bodyPositions}
           propertyPath={`slides[${currentSlide}].data.body.bodyPosition`}
           label="Position Textblock"
         />
@@ -87,9 +77,7 @@ export default () => {
         <InputRepeater
           propertyPath={`slides[${currentSlide}].data.body`}
           selectPosition
-          positionOptions={
-            state.slides[currentSlide].data.body.options.linePositions
-          }
+          positionOptions={body.options.linePositions}
         />
       </FieldSet>
 

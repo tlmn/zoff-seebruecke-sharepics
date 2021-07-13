@@ -1,11 +1,11 @@
-import React, { useContext, useRef } from "react";
+import React, { useRef } from "react";
 
 import Draggable from "react-draggable";
-import TemplateContext from "../templateContext";
 import { updateProperty } from "../../lib/lib";
+import useDataContext from "../../lib/useDataContext";
 
 const DraggableBG = ({ propertyPath, className }) => {
-  const [state, setState] = useContext(TemplateContext);
+  const { setState } = useDataContext();
   const refDraggable = useRef(null);
   return (
     <>

@@ -5,12 +5,15 @@ import FieldSet from "../../components/inputs/fieldSet";
 import Input from "../../components/inputs/input";
 import InputRepeater from "../../components/inputs/inputRepeater";
 import React from "react";
-import TemplateContext from "../../components/templateContext";
-import { useContext } from "react";
+import useDataContext from "../../lib/useDataContext";
 
 export default () => {
   const currentSlide = 0;
-  const [state] = useContext(TemplateContext);
+  const { state } = useDataContext();
+
+  const {
+    data: { logo },
+  } = state.slides[0];
 
   return (
     <ControlsWrapper>
@@ -19,7 +22,7 @@ export default () => {
           propertyPath={`slides[${currentSlide}].data.logo.show`}
           label="Logo anzeigen"
         />
-        {state.slides[0].data.logo.show && (
+        {logo.show && (
           <Input
             propertyPath={`slides[${currentSlide}].data.logo.branch`}
             label="Ortsgruppe"

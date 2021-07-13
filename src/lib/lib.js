@@ -1,6 +1,6 @@
 import { cloneDeepWith, get, initial, set } from "lodash";
-import { colorCombinations, colorThemes } from "../config/vars";
 
+import { colorThemes } from "../config/vars";
 import emojiRegex from "emoji-regex";
 import htmlToImage from "html-to-image";
 import { saveAs } from "file-saver";
