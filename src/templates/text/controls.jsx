@@ -14,7 +14,7 @@ export default () => {
 
   const {
     data: { logo },
-  } = state.slides[0];
+  } = state.slides[currentSlide];
 
   return (
     <>
