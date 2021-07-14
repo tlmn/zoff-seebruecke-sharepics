@@ -39,7 +39,8 @@ export default ({ children }) => {
           Seebrücke Sharepic Generator
         </h1>
         <h2 className="text-center mt-2 text-orange">
-          Der Generator läuft derzeit nur auf Desktop-Geräten.
+          Der Generator läuft derzeit nur auf Desktop-Geräten (Fensterbreite ab
+          992 Pixeln).
         </h2>
       </div>
     </>
